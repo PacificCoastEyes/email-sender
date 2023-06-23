@@ -35,11 +35,7 @@ namespace email_sender
             EmailClient emailClient = new(_configuration["AZURE_EMAIL_SERVICE_CONNECTION_STRING"]);
 
             string subject = "New message via Contact Form";
-            string content = @$"First Name: {message.firstName}
-            Last Name: { message.lastName}
-            Email: {message.email}
-            Phone: {message.phone}
-            Message: {message.message}";
+            string content = $"First Name: {message.firstName}\nLast Name: { message.lastName}\nEmail: {message.email}\nPhone: {message.phone}\nMessage: {message.message}";
             string sender = _configuration["SENDER_EMAIL_ADDRESS"];
             string recipient = _configuration["RECIPIENT_EMAIL_ADDRESS"];
 
@@ -87,7 +83,7 @@ namespace email_sender
 
             HttpResponseData response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "application/json");
-            response.WriteString("{ok: true}");
+            response.WriteString($"{{\"ok\": {emailSentSuccessfully}}}");
 
             return response;
         }
