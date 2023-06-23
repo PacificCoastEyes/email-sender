@@ -83,7 +83,7 @@ namespace email_sender
 
             HttpResponseData response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "application/json");
-            await response.WriteStringAsync($"{{\"ok\": {emailSentSuccessfully}}}");
+            await response.WriteStringAsync($"{{\"ok\": {emailSentSuccessfully.ToString().ToLower()}}}");
 
             return response;
         }
