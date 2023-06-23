@@ -82,8 +82,7 @@ namespace email_sender
             bool emailSentSuccessfully = await DispatchEmail(message);
 
             HttpResponseData response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "application/json");
-            response.WriteString($"{{\"ok\": {emailSentSuccessfully}}}");
+            await response.WriteStringAsync($"{{\"ok\": {emailSentSuccessfully}}}");
 
             return response;
         }
